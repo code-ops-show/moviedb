@@ -1,0 +1,9 @@
+<%= div_for movie do %>
+  <h2><%= link_to movie.name, movie %></h2>
+  <p><%= movie.synopsis %></p>
+  <ul>
+    <% movie.genres.each do |genre| %>
+      <li><%= link_to genre.name %></li>
+    <% end %>
+  </ul>
+<% end %>
