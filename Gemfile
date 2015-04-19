@@ -27,6 +27,8 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass'
 
+gem 'quiet_assets', group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
