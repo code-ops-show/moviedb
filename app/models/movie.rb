@@ -6,4 +6,10 @@ class Movie < ActiveRecord::Base
 
 	has_and_belongs_to_many :genres
   has_and_belongs_to_many :crews
+
+  def add_genres=(genres)
+    self.genres = genres.map do |g|
+      Genre.where(name: g).first_or_create!
+    end
+  end
 end

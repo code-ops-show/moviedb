@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  synopsis: MyText
-
-two:
-  name: MyString
-  synopsis: MyText
+avengers:
+  name: The Avengers
+  synopsis: Superheroes fight robot

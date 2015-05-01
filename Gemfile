@@ -27,6 +27,8 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass'
 
+gem 'sequel'
+
 gem 'quiet_assets', group: :development
 
 # Use ActiveModel has_secure_password
@@ -39,6 +41,7 @@ gem 'quiet_assets', group: :development
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'minitest-reporters'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

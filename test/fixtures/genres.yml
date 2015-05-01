@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+action:
+  name: Action
 
-two:
-  name: MyString
+adventure:
+  name: Adventure
+
+thriller:
+  name: Thriller
