@@ -12,4 +12,10 @@ class Movie < ActiveRecord::Base
       Genre.where(name: g).first_or_create!
     end
   end
+
+  def add_crews=(crews)
+    self.crews = crews.map do |c|
+      Crew.where(name: c).first_or_create!
+    end
+  end
 end
