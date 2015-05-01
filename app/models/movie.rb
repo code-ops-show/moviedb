@@ -15,9 +15,7 @@ class Movie < ActiveRecord::Base
 
   def add_many(type, data)
     if type.in? ['Genre', 'Crew']
-      type_plural = type.downcase.pluralize
-
-      self.send("#{type_plural}=", data.map do |g|
+      self.send("#{type.downcase.pluralize}=", data.map do |g|
         type.classify.constantize.where(name: g).first_or_create!
       end)
     else
