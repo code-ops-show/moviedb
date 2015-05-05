@@ -5,7 +5,9 @@ class Movie < ActiveRecord::Base
   validates :name, uniqueness: true
 
 	has_and_belongs_to_many :genres
-  has_and_belongs_to_many :crews
+
+  has_many :roles
+  has_many :crews, through: :roles
 
   class RelationError < StandardError
     def initialize(msg = "That Relationship Type doesn't exist")
