@@ -9,6 +9,21 @@ class Movie < ActiveRecord::Base
   has_many :roles
   has_many :crews, through: :roles
 
+  mapping do 
+    indexes :id, index: :not_analyzed
+    indexes :name
+    indexes :synopsis
+    indexes :crews
+    indexes :genres
+  end
+
+  def as_indexes_json(options = {})
+    self.as_json(only: [:id, :name, :synopsis],
+      include: { 
+        crews:  { only: [:id, :name] },
+        genres: { only: [:id, :name] }
+    })
+  end
   
 
   class RelationError < StandardError
