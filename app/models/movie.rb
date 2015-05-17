@@ -9,6 +9,8 @@ class Movie < ActiveRecord::Base
   has_many :roles
   has_many :crews, through: :roles
 
+  
+
   class RelationError < StandardError
     def initialize(msg = "That Relationship Type doesn't exist")
       super(msg)

@@ -5,8 +5,9 @@ class Omdb < Thor
 
   desc "import", "Import data from omdb"
   def import
+    movie_names = Movie.pluck(:name)
     movies = Sequel.connect('postgres://zacksiri@localhost:5432/omdb')[:movies]
-    movies.each do |mdb|
+    movies.order(:ID).each do |mdb|
       movie = Movie.create do |m|
         m.name         = mdb[:Title]
         m.synopsis     = mdb[:FullPlot]        unless mdb[:FullPlot] == 'N/A'
