@@ -28,7 +28,6 @@ class Movie < ActiveRecord::Base
   end
 
   
-
   class << self
     def custom_search(query)
       __elasticsearch__.search(query: multi_match_query(query))
@@ -39,7 +38,7 @@ class Movie < ActiveRecord::Base
         multi_match: { 
           query: query,
           type: "best_fields", # possible values "most_fields", "phrase", "phrase_prefix", "cross_fields"
-          fields: ["name^9", "synopsis^8", "year", "language^7", "country", "genres.name", "crews.name"],
+          fields: ["name^9", "synopsis^8", "year", "language^7", "country", "genres.name", "crews.name^10"],
           operator: "and"
         }
       }
