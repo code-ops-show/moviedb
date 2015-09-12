@@ -3,4 +3,6 @@ service:
   - library/postgres:9.4
   - library/elasticsearch:1.6.2
 script: 
+  - mkdir -p /tmp/bundle
+  - bundle install -j8 --path /tmp/bundle
   - rake
