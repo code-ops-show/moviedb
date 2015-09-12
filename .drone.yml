@@ -5,4 +5,5 @@ services:
 script:
   - mkdir -p /tmp/bundle
   - bundle install -j8 --path /tmp/bundle
-  - rake
+  - cp config/database.yml.example config/database.yml
+  - bundle exec rake db:create db:schema:load rake
