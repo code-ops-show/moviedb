@@ -1,0 +1,6 @@
+image: mwallasch/docker-ruby-node
+service: 
+  - library/postgres:9.4
+  - library/elasticsearch:1.6.2
+script: 
+  - rake
