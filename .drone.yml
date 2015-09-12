@@ -6,4 +6,4 @@ script:
   - mkdir -p /tmp/bundle
   - bundle install -j8 --path /tmp/bundle
   - cp config/database.yml.example config/database.yml
-  - bundle exec rake db:create db:schema:load rake
+  - bundle exec rake db:create db:schema:load test
