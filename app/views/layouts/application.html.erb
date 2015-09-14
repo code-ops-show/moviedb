@@ -8,39 +8,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
-  <nav class='navbar navbar-inverse navbar-static-top'>
-    <div class='container'>
-      <div class='navbar-header'>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <%= link_to "Movie DB", root_path, class: 'navbar-brand' %>
-      </div>
-      <div class="navbar-collapse collapse" id="navbar-collapsible">
-      <%= form_tag movies_path, class: 'navbar-form', role: 'search', method: :get do %>
-        <div class="form-group" style="display:inline;">
-          <div class="input-group input-group-sm">
-            <%= text_field_tag :q, params[:q], class: 'form-control' %>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span
-          </div>
-        </div>
-      <% end %>
-      </div>
-    </div>
-  </nav>
+  <%= render 'layouts/shared/navigation' %>
   <div class='container'>
     <%= yield %>
   </div>
-  <footer class='container'>
-    <div class='row'>
-      <p class='text-center'>
-        Created as a sample project for <%= link_to "Codemy.net Elasticsearch Series", "https://www.youtube.com/playlist?list=PLjQo0sojbbxWcy_byqkbe7j3boVTQurf9", target: "_blank" %>
-      </p>
-      <p class='text-center'>View <%= link_to "Source on Github", "https://github.com/zacksiri/moviedb", target: "_blank" %></p>
-    </div>
-  </footer>
+  <%= render 'layouts/shared/footer' %>
 </body>
 </html>

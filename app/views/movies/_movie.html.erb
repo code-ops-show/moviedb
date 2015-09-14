@@ -15,6 +15,13 @@
   </div>
   <div class='panel-body'>
     <p><%= movie.synopsis %></p>
-    <div class='label label-default'><%= movie.runtime.to_s + " minutes" if movie.runtime.present? %></div>
+    <div class='meta'>
+      <span class='label label-default'><%= movie.runtime.to_s + " minutes" if movie.runtime.present? %></span>
+      <span class='label label-default'><%= "Review: " + movie.review.to_s %></span>
+    </div>
+    <hr>
+    <% movie.crews.each do |crew| %>
+      <span class='label label-default'><%= crew.name %></span>
+    <% end %>
   </div>
 <% end %>
