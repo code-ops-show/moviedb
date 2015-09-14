@@ -1,7 +1,0 @@
-rvm:
-  - 2.2.2
-addons:
-  postgresql: "9.3"
-before_script:
-  - psql -c "create database moviedb_test" -U postgres
-script: rake

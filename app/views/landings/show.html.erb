@@ -1,0 +1,15 @@
+<div id='search-bar'>
+  <h1 id='logo' class='text-center'>Movie Database</h1>
+  <%= form_tag movies_path, class: 'search-field', role: 'search', method: :get do |f| %>
+  <div class='row'>
+    <div class='col-md-6 col-md-offset-3'>
+      <div class='input-group input-group-lg'>
+        <%= text_field_tag :q, params[:q], class: 'form-control' %>
+        <span class='input-group-btn'>
+          <%= button_tag "Search", class: 'btn btn-success', name: nil %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
