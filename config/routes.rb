@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :movies
+  resource :landing, only: [:show]
 
-  root to: 'movies#index'
+  root to: 'landings#show'
 end
