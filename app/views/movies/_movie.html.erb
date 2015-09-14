@@ -17,7 +17,7 @@
     <p><%= movie.synopsis %></p>
     <div class='meta'>
       <span class='label label-default'><%= movie.runtime.to_s + " minutes" if movie.runtime.present? %></span>
-      <span class='label label-default'><%= "Review: " + movie.review.to_s %></span>
+      <span class='label label-default'><%= "Review: " + movie.review.to_s  if movie.review.present? %></span>
     </div>
     <hr>
     <% movie.crews.each do |crew| %>
