@@ -16,11 +16,12 @@ class Movie < ActiveRecord::Base
     indexes :year
     indexes :language
     indexes :country
+    indexes :runtime,  type: 'integer'
     indexes :review,   type: 'float'
   end
 
   def as_indexed_json(options = {})
-    self.as_json(only: [:id, :name, :synopsis, :year, :country, :language, :review],
+    self.as_json(only: [:id, :name, :synopsis, :year, :country, :language, :runtime, :review],
       include: { 
         crews:  { only: [:id, :name] },
         genres: { only: [:id, :name] }

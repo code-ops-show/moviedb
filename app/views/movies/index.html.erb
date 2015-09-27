@@ -1,1 +1,3 @@
-<%= render @movies %>
+<% @movies.each do |movie| %>
+  <%= render 'movie', movie: movie %>
+<% end %>

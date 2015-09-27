@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_filter :beautify_search_url, only: [:index]
 
   def index
-    @movies = Movie.custom_search((params[:query].present? ? params[:query] : '*')).records
+    @movies = Movie.custom_search((params[:query].present? ? params[:query] : '*')).results
   end
 
 private
