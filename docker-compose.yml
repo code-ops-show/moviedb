@@ -8,3 +8,7 @@ web:
     - db
   env_file:
     - '.env.web'
+db:
+  image: library/postgres:9.4.5
+  ports:
+    - "15432:5432"
