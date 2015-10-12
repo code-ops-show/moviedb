@@ -2,7 +2,6 @@ class IndexerJob < ActiveJob::Base
   queue_as :elasticsearch
 
   def perform(operation, record_id)
-    logger.debug [operation, "Movie: #{record_id}"]
     self.send(operation, record_id)
   end
 
@@ -14,7 +13,7 @@ private
   end
 
   def delete(record_id)
-    record = Movie.find(record_id)
-    record.__elasticsearch__.delete_document
+    client = Movie.__elasticsearch__.client
+    client.delete index: Movie.index_name, type: Movie.model_name.to_s.downcase, id: record_id
   end
 end

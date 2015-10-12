@@ -4,7 +4,7 @@ class Movie < ActiveRecord::Base
   # implementing our own
   # include Elasticsearch::Model::Callbacks
 
-  after_commit  :index_document, on: [:create, :update]
+  after_commit  :index_document,  on: [:create, :update]
   after_commit  :delete_document, on: :destroy
 
   def index_document
