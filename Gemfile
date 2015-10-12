@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass'
+gem 'sidekiq'
 
 gem 'sequel'
 
