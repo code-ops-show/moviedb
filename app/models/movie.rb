@@ -68,7 +68,7 @@ class Movie < ActiveRecord::Base
 
     def aggregations
       { 
-        crews_aggregation: 
+        crew_aggregation: 
         {  
           nested: { path: "crews" }, 
           aggs: crew_aggregation
