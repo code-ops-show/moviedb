@@ -1,6 +1,19 @@
 class Movie < ActiveRecord::Base
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # we don't need the line below because we're
+  # implementing our own
+  # include Elasticsearch::Model::Callbacks
+
+  after_commit  :index_document,  on: [:create, :update]
+  after_commit  :delete_document, on: :destroy
+
+  def index_document
+    IndexerJob.perform_later('index',  self.id)
+  end
+
+  def delete_document
+    IndexerJob.perform_later('delete', self.id)
+  end
 
   validates :name, uniqueness: true
 
@@ -46,7 +59,6 @@ class Movie < ActiveRecord::Base
     end
   end
   
-
   class RelationError < StandardError
     def initialize(msg = "That Relationship Type doesn't exist")
       super(msg)
