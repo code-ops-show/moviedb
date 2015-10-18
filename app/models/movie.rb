@@ -29,8 +29,16 @@ class Movie < ActiveRecord::Base
     indexes :year
     indexes :language
     indexes :country
-    indexes :runtime,  type: 'integer'
-    indexes :review,   type: 'float'
+    indexes :runtime,      type: 'integer'
+    indexes :review,       type: 'float'
+    indexes :crews, type: 'nested' do 
+      indexes :id,   type: 'integer'
+      indexes :name, type: 'string', index: :not_analyzed
+    end
+    indexes :genres, type: 'nested' do 
+      indexes :id,   type: 'integer'
+      indexes :name, type: 'string', index: :not_analyzed
+    end
   end
 
   def as_indexed_json(options = {})
@@ -44,7 +52,7 @@ class Movie < ActiveRecord::Base
   
   class << self
     def custom_search(query)
-      __elasticsearch__.search(query: multi_match_query(query))
+      __elasticsearch__.search(query: multi_match_query(query), aggs: aggregations)
     end
 
     def multi_match_query(query)
@@ -54,6 +62,24 @@ class Movie < ActiveRecord::Base
           type: "best_fields", # possible values "most_fields", "phrase", "phrase_prefix", "cross_fields"
           fields: ["name^9", "synopsis^8", "year", "language^7", "country", "genres.name", "crews.name^10"],
           operator: "and"
+        }
+      }
+    end
+
+    def aggregations
+      { 
+        crews_aggregation: 
+        {  
+          nested: { path: "crews" }, 
+          aggs: crew_aggregation
+        }
+      }
+    end
+
+    def crew_aggregation
+      { crews: 
+        { 
+          terms: { script: "doc['crews.id'].value + '|' + doc['crews.name'].value" }
         }
       }
     end
