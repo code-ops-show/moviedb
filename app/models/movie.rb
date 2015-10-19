@@ -77,9 +77,9 @@ class Movie < ActiveRecord::Base
     end
 
     def crew_aggregation
-      { crews: 
+      { id_and_name: 
         { 
-          terms: { script: "doc['crews.id'].value + '|' + doc['crews.name'].value" }
+          terms: { script: "doc['crews.id'].value + '|' + doc['crews.name'].value", size: 30 }
         }
       }
     end
