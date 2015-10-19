@@ -51,8 +51,9 @@ class Movie < ActiveRecord::Base
 
   
   class << self
-    def custom_search(query)
-      __elasticsearch__.search(query: multi_match_query(query), aggs: aggregations)
+    def custom_search(query_segment)
+      keyword = query_segment["keyword"]
+      __elasticsearch__.search(query: multi_match_query(query_segment["keyword"]), aggs: aggregations)
     end
 
     def multi_match_query(query)
@@ -79,7 +80,7 @@ class Movie < ActiveRecord::Base
     def crew_aggregation
       { id_and_name: 
         { 
-          terms: { script: "doc['crews.id'].value + '|' + doc['crews.name'].value", size: 30 }
+          terms: { script: "doc['crews.id'].value + '|' + doc['crews.name'].value", size: 15 }
         }
       }
     end
