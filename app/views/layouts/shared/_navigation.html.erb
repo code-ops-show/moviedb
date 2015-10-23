@@ -13,7 +13,7 @@
     <%= form_tag movies_path, class: 'navbar-form', role: 'search', method: :get do %>
       <div class="form-group" style="display:inline;">
         <div class="input-group input-group-sm">
-          <%= text_field_tag :q, segmented_query["keyword"], class: 'form-control', required: true %>
+          <%= text_field_tag :q, segment_refiner_query_by["keyword"], class: 'form-control', required: true %>
           <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span
         </div>
       </div>
