@@ -10,11 +10,11 @@ class Omdb < Thor
     movies.order(:ID).each do |mdb|
       movie = Movie.create do |m|
         m.name         = mdb[:Title]
-        m.synopsis     = mdb[:FullPlot]        unless mdb[:FullPlot] == 'N/A'
+        m.synopsis     = mdb[:FullPlot]        unless mdb[:FullPlot]   == 'N/A'
         m.year         = mdb[:Year].to_i
-        m.country      = mdb[:Country]         unless mdb[:Country]  == 'N/A'
-        m.language     = mdb[:Language]        unless mdb[:Language] == 'N/A'
-        m.runtime      = mdb[:Runtime].to_i    unless mdb[:Runtime]  == 'N/A'
+        m.country      = mdb[:Country]         unless mdb[:Country]    == 'N/A'
+        m.language     = mdb[:Language]        unless mdb[:Language]   == 'N/A'
+        m.runtime      = mdb[:Runtime].to_i    unless mdb[:Runtime]    == 'N/A'
         m.review       = mdb[:imdbRating].to_f unless mdb[:imdbRating] == 'N/A'
         m.release_date = Date.parse(mdb[:Released]) if mdb[:Released]
       end

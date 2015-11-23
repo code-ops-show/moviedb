@@ -52,6 +52,7 @@ class Movie < ActiveRecord::Base
   
   class << self
     def custom_search(query_segment)
+      # { "keyword" => "Terminator", "crews" => "1,27", "genres" => "2332, 2323"}
       keyword         = query_segment.delete("keyword")
       filter_segments = query_segment
       __elasticsearch__.search(query: multi_match_query(keyword), aggs: aggregations, filter: filters(filter_segments))
@@ -99,6 +100,7 @@ class Movie < ActiveRecord::Base
 
     def nested_terms_filter(segments)
       segments.keys.map do |path|
+        # segment.keys = ['crews', 'genres']
         { 
           nested: { 
             path: path,
