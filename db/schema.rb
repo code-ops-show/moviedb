@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419152045) do
+ActiveRecord::Schema.define(version: 20150501104039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "crews", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "genres", force: :cascade do |t|
     t.string   "name"
@@ -34,8 +40,28 @@ ActiveRecord::Schema.define(version: 20150419152045) do
   create_table "movies", force: :cascade do |t|
     t.string   "name"
     t.text     "synopsis"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "country"
+    t.integer  "year"
+    t.float    "review"
+    t.string   "rating"
+    t.integer  "runtime"
+    t.string   "language"
+    t.date     "release_date"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "crew_id"
+    t.string   "job"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "roles", ["crew_id"], name: "index_roles_on_crew_id", using: :btree
+  add_index "roles", ["movie_id"], name: "index_roles_on_movie_id", using: :btree
+
+  add_foreign_key "roles", "crews"
+  add_foreign_key "roles", "movies"
 end

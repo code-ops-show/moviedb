@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :movies
+  resources :movies, only: [:show, :index] do 
+    get 'search/*query', to: 'movies#index', as: :search, on: :collection
+  end
 
-  root to: 'movies#index'
+  resource :landing, only: [:show]
+
+  root to: 'landings#show'
 end

@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -26,6 +27,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass'
+gem 'sidekiq'
+gem 'refiner'
+gem 'sequel'
 
 gem 'quiet_assets', group: :development
 
@@ -39,6 +43,8 @@ gem 'quiet_assets', group: :development
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'minitest-reporters'
+  gem 'pry'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

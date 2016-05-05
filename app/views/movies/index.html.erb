@@ -1,14 +1,12 @@
-<h1>All Movies</h1>
-
-<nav class='navbar navbar-default'>
-  <div class='container'>
-    <%= form_tag movies_path, class: 'navbar-form navbar-left', role: 'search', method: :get do |f| %>
-      <div class='form-group'>
-        <%= text_field_tag :q, params[:q], class: 'form-control' %>
-      </div>
-      <%= button_tag "Search", class: 'btn btn-default', name: nil %>
+<div class='row'>
+  <div class='col-md-9'>
+    <% @movies.each do |movie| %>
+      <%= render 'movie', movie: movie %>
     <% end %>
   </div>
-</nav>
-
-<%= render @movies %>
+  <div class='col-md-3'>
+    <% @aggs.each do |agg| %>
+      <%= render 'aggregations/aggregation', agg: agg %>
+    <% end %>
+  </div>
+</div>

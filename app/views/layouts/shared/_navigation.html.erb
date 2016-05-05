@@ -1,0 +1,23 @@
+<nav class='navbar navbar-inverse navbar-static-top'>
+  <div class='container'>
+    <div class='navbar-header'>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Movie DB", root_path, class: 'navbar-brand' %>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapsible">
+    <%= form_tag movies_path, class: 'navbar-form', role: 'search', method: :get do %>
+      <div class="form-group" style="display:inline;">
+        <div class="input-group input-group-sm">
+          <%= text_field_tag :q, segmented_query["keyword"], class: 'form-control', required: true %>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</nav>

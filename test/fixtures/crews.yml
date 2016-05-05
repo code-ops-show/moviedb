@@ -1,5 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-avengers:
-  name: The Avengers
-  synopsis: Superheroes fight robot
+mark_ruffalo:
+  name: Mark Ruffalo
