@@ -29,8 +29,16 @@ class Movie < ActiveRecord::Base
     indexes :year
     indexes :language
     indexes :country
-    indexes :runtime,  type: 'integer'
-    indexes :review,   type: 'float'
+    indexes :runtime,      type: 'integer'
+    indexes :review,       type: 'float'
+    indexes :crews, type: 'nested' do 
+      indexes :id,   type: 'integer'
+      indexes :name, type: 'string', index: :not_analyzed
+    end
+    indexes :genres, type: 'nested' do 
+      indexes :id,   type: 'integer'
+      indexes :name, type: 'string', index: :not_analyzed
+    end
   end
 
   def as_indexed_json(options = {})
@@ -43,19 +51,14 @@ class Movie < ActiveRecord::Base
 
   
   class << self
-    def custom_search(query)
-      __elasticsearch__.search(query: multi_match_query(query))
-    end
+    def custom_search(query_segment)
+      # { "keyword" => "Terminator", "crews" => "1,27", "genres" => "2332, 2323"}
+      keyword         = query_segment.delete("keyword")
+      filter_segments = query_segment
 
-    def multi_match_query(query)
-      { 
-        multi_match: { 
-          query: query,
-          type: "best_fields", # possible values "most_fields", "phrase", "phrase_prefix", "cross_fields"
-          fields: ["name^9", "synopsis^8", "year", "language^7", "country", "genres.name", "crews.name^10"],
-          operator: "and"
-        }
-      }
+      __elasticsearch__.search(query:  MoviesQuery.build(keyword),
+                               aggs:   MoviesQuery::Aggregate.build, 
+                               filter: MoviesQuery::Filter.build(filter_segments))
     end
   end
   

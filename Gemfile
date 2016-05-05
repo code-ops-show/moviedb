@@ -28,7 +28,7 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass'
 gem 'sidekiq'
-
+gem 'refiner'
 gem 'sequel'
 
 gem 'quiet_assets', group: :development
