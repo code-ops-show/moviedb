@@ -55,61 +55,10 @@ class Movie < ActiveRecord::Base
       # { "keyword" => "Terminator", "crews" => "1,27", "genres" => "2332, 2323"}
       keyword         = query_segment.delete("keyword")
       filter_segments = query_segment
-      __elasticsearch__.search(query: multi_match_query(keyword), aggs: aggregations, filter: filters(filter_segments))
-    end
 
-    def multi_match_query(query)
-      { 
-        multi_match: { 
-          query: query,
-          type: "best_fields", # possible values "most_fields", "phrase", "phrase_prefix", "cross_fields"
-          fields: ["name^9", "synopsis^8", "year", "language^7", "country", "genres.name", "crews.name^10"],
-          operator: "and"
-        }
-      }
-    end
-
-    def aggregations
-      { 
-        crew_aggregation: {  
-          nested: { path: "crews" }, 
-          aggs: generate_aggregation_for("crews")
-        },
-        genre_aggregation: { 
-          nested: { path: "genres" },
-          aggs: generate_aggregation_for("genres")
-        }
-      }
-    end
-
-    def generate_aggregation_for(agg_type)
-      { 
-        id_and_name: { 
-          terms: { script: "doc['#{agg_type}.id'].value + '|' + doc['#{agg_type}.name'].value", size: 15 }
-        }
-      }
-    end
-
-    def filters(filter_segments)
-      { 
-        bool: { 
-          must: nested_terms_filter(filter_segments)
-        }
-      }
-    end
-
-    def nested_terms_filter(segments)
-      segments.keys.map do |path|
-        # segment.keys = ['crews', 'genres']
-        { 
-          nested: { 
-            path: path,
-            filter: { 
-              terms: { "#{path}.id": segments[path].split(',').map(&:to_i) }
-            }
-          }
-        }
-      end
+      __elasticsearch__.search(query:  MoviesQuery.build(keyword),
+                               aggs:   MoviesQuery::Aggregate.build, 
+                               filter: MoviesQuery::Filter.build(filter_segments))
     end
   end
   
