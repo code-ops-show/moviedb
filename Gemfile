@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -30,6 +30,12 @@ gem 'bootstrap-sass'
 gem 'sidekiq'
 gem 'refiner'
 gem 'sequel'
+
+
+group :production do
+  gem 'therubyracer'
+  gem 'activerecord-nulldb-adapter'
+end
 
 gem 'quiet_assets', group: :development
 
