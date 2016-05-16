@@ -147,6 +147,8 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.3.0)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     refiner (1.0.2)
     ruby-progressbar (1.8.0)
     sass (3.4.22)
@@ -206,6 +208,8 @@ DEPENDENCIES
   puma
   quiet_assets
   rails (= 4.2.6)
+  redis
+  redis-namespace
   refiner
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
