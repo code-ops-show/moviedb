@@ -33,7 +33,6 @@ gem 'sequel'
 
 
 group :production do
-  gem 'therubyracer'
   gem 'activerecord-nulldb-adapter'
 end
 
@@ -44,6 +43,7 @@ gem 'quiet_assets', group: :development
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
