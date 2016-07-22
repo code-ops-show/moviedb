@@ -6,6 +6,12 @@ build:
     - bundle exec rake db:create db:schema:load
     - bundle exec rake test
 
+  environment:
+    RACK_ENV: test
+    RAILS_ENV: test
+    SECRET_KEY_BASE: blahblahblah
+    AWS_SECRET_KEY: $$AWS_SECRET_KEY
+
 compose:
   database:
     image: postgres:9.5.1
@@ -13,3 +19,16 @@ compose:
     image: redis:3.0.7
   elasticsearch:
     image: elasticsearch:2.2.0
+
+cache:
+  mount:
+    - vendor/bundle
+    - .git
+
+publish:
+  docker:
+    username: zacksiri
+    password: $$DOCKER_HUB_PASSWORD
+    email: zack@codemy.net
+    repo: foo/bar
+    tag: latest
