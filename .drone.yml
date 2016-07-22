@@ -1,9 +1,34 @@
-image: mwallasch/docker-ruby-node
-services: 
-  - library/postgres:9.4.4
-  - library/elasticsearch:1.6.2
-script:
-  - mkdir -p /tmp/bundle
-  - bundle install -j8 --path /tmp/bundle
-  - cp config/database.yml.example config/database.yml
-  - bundle exec rake db:create db:schema:load test
+build:
+  image: codemy/ruby:2.3.1
+  commands: 
+    - gem update bundler
+    - bundle install --path vendor/bundle
+    - bundle exec rake db:create db:schema:load
+    - bundle exec rake test
+
+  environment:
+    RACK_ENV: test
+    RAILS_ENV: test
+    SECRET_KEY_BASE: blahblahblah
+    AWS_SECRET_KEY: $$AWS_SECRET_KEY
+
+compose:
+  database:
+    image: postgres:9.5.1
+  redis:
+    image: redis:3.0.7
+  elasticsearch:
+    image: elasticsearch:2.2.0
+
+cache:
+  mount:
+    - vendor/bundle
+    - .git
+
+publish:
+  docker:
+    username: zacksiri
+    password: $$DOCKER_HUB_PASSWORD
+    email: zack@codemy.net
+    repo: codemy/moviedb
+    tag: latest
