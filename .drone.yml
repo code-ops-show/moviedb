@@ -26,6 +26,7 @@ cache:
 
 publish:
   docker:
+    storage_driver: aufs
     username: zacksiri
     password: $$DOCKER_HUB_PASSWORD
     email: zack@codemy.net
