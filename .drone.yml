@@ -10,7 +10,6 @@ build:
     RACK_ENV: test
     RAILS_ENV: test
     SECRET_KEY_BASE: blahblahblah
-    AWS_SECRET_KEY: $$AWS_SECRET_KEY
 
 compose:
   database:
