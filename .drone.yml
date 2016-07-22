@@ -30,5 +30,5 @@ publish:
     username: zacksiri
     password: $$DOCKER_HUB_PASSWORD
     email: zack@codemy.net
-    repo: foo/bar
+    repo: codemy/moviedb
     tag: latest
