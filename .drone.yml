@@ -32,6 +32,18 @@ publish:
     email: zack@codemy.net
     repo: codemy/moviedb
     tag: latest
+    when:
+      branch: master
+
+  docker:
+    storage_driver: overlay
+    username: zacksiri
+    password: $$DOCKER_HUB_PASSWORD
+    email: zack@codemy.net
+    repo: codemy/moviedb
+    tag: $$TAG
+    when:
+      event: tag
 
 deploy:
   rancher:
@@ -40,12 +52,33 @@ deploy:
     secret_key: 6ESn1FhSsK7ptTTLnSyS9LT11RCyQKAgEaWr8pDL
     service: moviedb/web
     docker_image: codemy/moviedb:latest
+    when:
+      branch: master
 
-deploy:
   rancher:
     url: http://139.162.43.181:8080/v1/projects/1a5
     access_key: 331394D5CCCEA7E2BE53
     secret_key: 6ESn1FhSsK7ptTTLnSyS9LT11RCyQKAgEaWr8pDL
     service: moviedb/worker
     docker_image: codemy/moviedb:latest
+    when:
+      branch: master
+
+  rancher:
+    url: http://139.162.43.181:8080/v1/projects/1a27
+    access_key: 11DA23F40759A1A305F5
+    secret_key: xvidTFM5aKdFVFkBBgQvbiYqMcS99NR1eUTZAJG1
+    service: moviedb/web
+    docker_image: codemy/moviedb:$$TAG
+    when:
+      event: tag
+
+  rancher:
+    url: http://139.162.43.181:8080/v1/projects/1a27
+    access_key: 11DA23F40759A1A305F5
+    secret_key: xvidTFM5aKdFVFkBBgQvbiYqMcS99NR1eUTZAJG1
+    service: moviedb/worker
+    docker_image: codemy/moviedb:$$TAG
+    when:
+      event: tag
     
