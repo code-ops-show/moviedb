@@ -32,4 +32,20 @@ publish:
     email: zack@codemy.net
     repo: codemy/moviedb
     tag: latest
+
+deploy:
+  rancher:
+    url: http://139.162.43.181:8080/v1/projects/1a5
+    access_key: 331394D5CCCEA7E2BE53
+    secret_key: 6ESn1FhSsK7ptTTLnSyS9LT11RCyQKAgEaWr8pDL
+    service: moviedb/web
+    docker_image: codemy/moviedb:latest
+
+deploy:
+  rancher:
+    url: http://139.162.43.181:8080/v1/projects/1a5
+    access_key: 331394D5CCCEA7E2BE53
+    secret_key: 6ESn1FhSsK7ptTTLnSyS9LT11RCyQKAgEaWr8pDL
+    service: moviedb/worker
+    docker_image: codemy/moviedb:latest
     
